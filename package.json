@@ -1,0 +1,20 @@
+{
+  "name": "night-galaxy",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "vite": "^4.3.9",
+    "vite-plugin-glsl": "^1.0.2"
+  },
+  "dependencies": {
+    "lil-gui": "^0.18.1",
+    "stats.js": "^0.17.0",
+    "three": "^0.158.0",
+    "gsap": "^3.7.1"
+  }
+}
