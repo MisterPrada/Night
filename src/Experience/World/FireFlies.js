@@ -2,6 +2,7 @@ import * as THREE from 'three'
 import Experience from '../Experience.js'
 import firefliesVertexShader from '../Shaders/FireFlies/vertex.glsl'
 import firefliesFragmentShader from '../Shaders/FireFlies/fragment.glsl'
+import {calculateParticleSize} from "../Utils/Functions.js";
 
 export default class FireFlies {
     constructor() {
@@ -14,12 +15,17 @@ export default class FireFlies {
         this.renderer = this.experience.renderer.instance
         this.timeline = this.experience.timeline
         this.resources = this.experience.resources
-
+        this.size = this.experience.sizes
 
         this.setModelLeft()
         this.setModelCenter()
         this.setModelRight()
         this.setDebug()
+    }
+
+    getParticleSize(uSize)
+    {
+        return calculateParticleSize(this.size.height, 1, 700, 1, uSize) * this.renderer.getPixelRatio()
     }
 
     setModelLeft() {
@@ -51,7 +57,7 @@ export default class FireFlies {
             uniforms:
                 {
                     uPixelRatio: { value: Math.min(window.devicePixelRatio, 2) },
-                    uSize: { value: 300 },
+                    uSize: { value: this.getParticleSize(300) },
                     uTime: { value: 0 },
                 },
             vertexShader: firefliesVertexShader,
@@ -102,7 +108,7 @@ export default class FireFlies {
             uniforms:
                 {
                     uPixelRatio: { value: Math.min(window.devicePixelRatio, 2) },
-                    uSize: { value: 120 },
+                    uSize: { value: this.getParticleSize(120) },
                     uTime: { value: 0 },
                 },
             vertexShader: firefliesVertexShader,
@@ -152,7 +158,7 @@ export default class FireFlies {
             uniforms:
                 {
                     uPixelRatio: { value: Math.min(window.devicePixelRatio, 2) },
-                    uSize: { value: 150 },
+                    uSize: { value: this.getParticleSize(150) },
                     uTime: { value: 0 },
                 },
             vertexShader: firefliesVertexShader,
@@ -178,6 +184,10 @@ export default class FireFlies {
         this.firefliesMaterial.uniforms.uPixelRatio.value = Math.min(window.devicePixelRatio, 2)
         this.firefliesCenterMaterial.uniforms.uPixelRatio.value = Math.min(window.devicePixelRatio, 2)
         this.firefliesRightMaterial.uniforms.uPixelRatio.value = Math.min(window.devicePixelRatio, 2)
+
+        this.firefliesMaterial.uniforms.uSize.value = this.getParticleSize(300)
+        this.firefliesCenterMaterial.uniforms.uSize.value = this.getParticleSize(120)
+        this.firefliesRightMaterial.uniforms.uSize.value = this.getParticleSize(150)
     }
 
     update() {

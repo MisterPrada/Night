@@ -2,13 +2,14 @@ import * as THREE from 'three'
 import Experience from '../Experience.js'
 import galaxyVertexShader from '../Shaders/Galaxy/vertex.glsl'
 import galaxyFragmentShader from '../Shaders/Galaxy/fragment.glsl'
-import Time from '../Utils/Time.js'
+import { calculateParticleSize } from "../Utils/Functions.js";
 export default class Galaxy {
     constructor() {
         this.experience = new Experience()
         this.debug = this.experience.debug
         this.scene = this.experience.scene
         this.time = this.experience.time
+        this.size = this.experience.sizes
         this.renderer = this.experience.renderer.instance
 
         /**
@@ -47,6 +48,11 @@ export default class Galaxy {
 
         this.generateGalaxy()
         this.setDebug()
+    }
+
+    getParticleSize()
+    {
+        return calculateParticleSize(this.size.height, 1, 700, 1, 250) * this.renderer.getPixelRatio()
     }
 
     generateGalaxy()
@@ -164,6 +170,7 @@ export default class Galaxy {
         /**
          * Material
          */
+
         this.material = new THREE.ShaderMaterial({
             depthWrite: false,
             //depthTest: true,
@@ -173,7 +180,7 @@ export default class Galaxy {
             uniforms:
                 {
                     uTime: { value: 0 },
-                    uSize: { value: this.parameters.uSize * this.renderer.getPixelRatio() },
+                    uSize: { value: this.getParticleSize() },
                     uPositionX: { value: this.parameters.uPositionX },
                     uPositionY: { value: this.parameters.uPositionY },
                     uPositionZ: { value: this.parameters.uPositionZ },
@@ -193,7 +200,7 @@ export default class Galaxy {
     }
 
     resize() {
-        this.material.uniforms.uSize.value = this.parameters.uSize * this.renderer.getPixelRatio()
+        this.material.uniforms.uSize.value = this.getParticleSize()
     }
 
     setDebug() {
