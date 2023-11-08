@@ -45,6 +45,7 @@ export default class Experience
         this.debug = new Debug()
         this.sizes = new Sizes()
         this.time = new Time()
+        this.cursor = { x: 0, y: 0 }
         this.scene = new THREE.Scene()
         this.camera = new Camera()
         this.renderer = new Renderer()
@@ -67,6 +68,13 @@ export default class Experience
         {
             this.update()
             this.debug.stats && this.debug.stats.update();
+        })
+
+        // Mouse move event
+        window.addEventListener('mousemove', (event) =>
+        {
+            this.cursor.x = event.clientX / this.sizes.width * 2 - 1
+            this.cursor.y = - (event.clientY / this.sizes.height) * 2 + 1
         })
     }
 

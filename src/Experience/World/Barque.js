@@ -38,7 +38,6 @@ export default class Barque {
         {
             if (child instanceof THREE.Mesh)
             {
-                console.log(child)
                 child.material = new THREE.MeshPhongMaterial();
                 child.scale.set(-scale, scale, -scale);
                 child.material.map = texture;

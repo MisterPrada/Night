@@ -181,9 +181,9 @@ export default class FireFlies {
     }
 
     update() {
-        this.firefliesMaterial.uniforms.uTime.value = this.time.elapsed * 2
-        this.firefliesCenterMaterial.uniforms.uTime.value = this.time.elapsed * 2
-        this.firefliesRightMaterial.uniforms.uTime.value = this.time.elapsed * 2
+        this.firefliesMaterial.uniforms.uTime.value = this.time.elapsed
+        this.firefliesCenterMaterial.uniforms.uTime.value = this.time.elapsed
+        this.firefliesRightMaterial.uniforms.uTime.value = this.time.elapsed
     }
 
     setDebug() {

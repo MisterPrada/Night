@@ -12,6 +12,11 @@ export default class Camera
         this.scene = this.experience.scene
         this.canvas = this.experience.canvas
         this.timeline = this.experience.timeline
+        this.time = this.experience.time
+        this.cursorEnabled = true
+
+        this.lerpVector = new THREE.Vector3();
+        this.lerpFactor = 0.8
 
         this.setInstance()
         //this.setControls()
@@ -47,12 +52,26 @@ export default class Camera
 
     update()
     {
+        if (this.cursorEnabled === true) {
+            const lerpTarget = new THREE.Vector3();
+            console.log(this.experience.cursor.x, this.experience.cursor.y)
+            const targetX = this.experience.cursor.x * 1;
+            const targetY = this.experience.cursor.y * 1;
+
+            lerpTarget.set(targetX, targetY, this.instance.position.z)
+
+            this.lerpVector.lerp(new THREE.Vector3().copy(lerpTarget), this.lerpFactor * this.time.delta);
+
+            this.instance.lookAt(this.lerpVector.x - 1, 2, 0);
+            this.instance2.lookAt(this.lerpVector.x - 1, 1, 0);
+        }
+
         this.instance2.position.x = this.instance.position.x;
         this.instance2.position.y = -this.instance.position.y;
         this.instance2.position.z = this.instance.position.z;
 
-        this.instance.lookAt(new THREE.Vector3(-1, 2., 0));
-        this.instance2.lookAt(new THREE.Vector3(-1, 1., 0));
+        //this.instance.lookAt(new THREE.Vector3(-1, 2., 0));
+        //this.instance2.lookAt(new THREE.Vector3(-1, 1., 0));
         //this.controls.update()
     }
 
