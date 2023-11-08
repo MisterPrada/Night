@@ -22,10 +22,28 @@ export default class Camera
         //this.setControls()
     }
 
+
+    calculateFOV(windowWidth, minWidth, maxWidth, minSize, maxSize) {
+        // Normalize width between 0 and 1
+        let normalizedWidth = (windowWidth - minWidth) / (maxWidth - minWidth);
+        normalizedWidth = Math.max(0, Math.min(1, normalizedWidth)); // Clamp between 0 and 1
+
+        // Interpolate between minSize and maxSize based on normalizedWidth
+        return minSize + (maxSize - minSize) * normalizedWidth;
+    }
+
+
+    getFov()
+    {
+        console.log(this.calculateFOV(this.sizes.width, 1, 800, 200, 60))
+        return this.calculateFOV(this.sizes.width, 1, 800, 200, 60);
+    }
+
     setInstance()
     {
-        this.instance = new THREE.PerspectiveCamera(60, this.sizes.width / this.sizes.height, 0.1, 500)
-        this.instance2 = new THREE.PerspectiveCamera(60, this.sizes.width / this.sizes.height, 0.1, 500)
+        console.log(this.getFov())
+        this.instance = new THREE.PerspectiveCamera(this.getFov(), this.sizes.width / this.sizes.height, 0.1, 500)
+        this.instance2 = new THREE.PerspectiveCamera(this.getFov(), this.sizes.width / this.sizes.height, 0.1, 500)
         const defaultCameraPosition = new THREE.Vector3(1.6, 3.8, 35.);
 
         this.instance.position.copy(defaultCameraPosition)
@@ -43,9 +61,11 @@ export default class Camera
 
     resize()
     {
+        this.instance.fov = this.getFov()
         this.instance.aspect = this.sizes.width / this.sizes.height
         this.instance.updateProjectionMatrix()
 
+        this.instance2.fov = this.getFov()
         this.instance2.aspect = this.sizes.width / this.sizes.height
         this.instance2.updateProjectionMatrix()
     }
@@ -54,9 +74,8 @@ export default class Camera
     {
         if (this.cursorEnabled === true) {
             const lerpTarget = new THREE.Vector3();
-            console.log(this.experience.cursor.x, this.experience.cursor.y)
-            const targetX = this.experience.cursor.x * 1;
-            const targetY = this.experience.cursor.y * 1;
+            const targetX = this.experience.cursor.x;
+            const targetY = this.experience.cursor.y;
 
             lerpTarget.set(targetX, targetY, this.instance.position.z)
 

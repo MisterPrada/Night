@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import Experience from '../Experience.js'
 import firefliesVertexShader from '../Shaders/FireFlies/vertex.glsl'
 import firefliesFragmentShader from '../Shaders/FireFlies/fragment.glsl'
-import {calculateParticleSize} from "../Utils/Functions.js";
+import { calculateParticleSize } from "../Utils/Functions.js";
 
 export default class FireFlies {
     constructor() {
@@ -10,7 +10,7 @@ export default class FireFlies {
         this.debug = this.experience.debug
         this.scene = this.experience.scene
         this.time = this.experience.time
-        this.camera = this.experience.camera
+        this.camera = this.experience.camera.instance
         this.debug = this.experience.debug
         this.renderer = this.experience.renderer.instance
         this.timeline = this.experience.timeline
@@ -25,7 +25,7 @@ export default class FireFlies {
 
     getParticleSize(uSize)
     {
-        return calculateParticleSize(this.size.height, 1, 700, 1, uSize) * this.renderer.getPixelRatio()
+        return calculateParticleSize(this.size.height, 1, 700, 1, uSize, this.camera.fov) * this.renderer.getPixelRatio()
     }
 
     setModelLeft() {

@@ -11,6 +11,7 @@ export default class Galaxy {
         this.time = this.experience.time
         this.size = this.experience.sizes
         this.renderer = this.experience.renderer.instance
+        this.camera = this.experience.camera.instance
 
         /**
          * Galaxy Parameters
@@ -52,7 +53,7 @@ export default class Galaxy {
 
     getParticleSize()
     {
-        return calculateParticleSize(this.size.height, 1, 700, 1, 250) * this.renderer.getPixelRatio()
+        return calculateParticleSize(this.size.height, 1, 700, 1, 250, this.camera.fov) * this.renderer.getPixelRatio()
     }
 
     generateGalaxy()
