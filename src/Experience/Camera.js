@@ -14,14 +14,14 @@ export default class Camera
         this.timeline = this.experience.timeline
 
         this.setInstance()
-        this.setControls()
+        //this.setControls()
     }
 
     setInstance()
     {
         this.instance = new THREE.PerspectiveCamera(60, this.sizes.width / this.sizes.height, 0.1, 500)
         this.instance2 = new THREE.PerspectiveCamera(60, this.sizes.width / this.sizes.height, 0.1, 500)
-        const defaultCameraPosition = new THREE.Vector3(2.6, 3.8, 35.);
+        const defaultCameraPosition = new THREE.Vector3(1.6, 3.8, 35.);
 
         this.instance.position.copy(defaultCameraPosition)
         this.instance2.position.copy(defaultCameraPosition)
@@ -51,9 +51,9 @@ export default class Camera
         this.instance2.position.y = -this.instance.position.y;
         this.instance2.position.z = this.instance.position.z;
 
-        this.instance.lookAt(new THREE.Vector3(0, 2., 0));
-        this.instance2.lookAt(new THREE.Vector3(0, 1., 0));
-        this.controls.update()
+        this.instance.lookAt(new THREE.Vector3(-1, 2., 0));
+        this.instance2.lookAt(new THREE.Vector3(-1, 1., 0));
+        //this.controls.update()
     }
 
     animateCameraPosition() {
