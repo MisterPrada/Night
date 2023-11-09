@@ -24,7 +24,7 @@ export function calculateParticleSize(windowHeight, minHeight, maxHeight, minSiz
     const fovFactor = 1 / Math.tan((fov / 2 * 1.5) * (Math.PI / 180)); // Convert FOV from degrees to radians and calculate tangent
     size *= fovFactor;
 
-    return size;
+    return Math.abs(size);
 }
 
 // export function calculateParticleSize(windowHeight, minHeight, maxHeight, minSize, maxSize) {

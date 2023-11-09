@@ -35,13 +35,14 @@ export default class Camera
 
     getFov()
     {
-        console.log(this.calculateFOV(this.sizes.width, 1, 800, 200, 60))
+        //console.log(this.calculateFOV(this.sizes.width, 1, 800, 200, 60))
         return this.calculateFOV(this.sizes.width, 1, 800, 200, 60);
+
+        //return 150;
     }
 
     setInstance()
     {
-        console.log(this.getFov())
         this.instance = new THREE.PerspectiveCamera(this.getFov(), this.sizes.width / this.sizes.height, 0.1, 500)
         this.instance2 = new THREE.PerspectiveCamera(this.getFov(), this.sizes.width / this.sizes.height, 0.1, 500)
         const defaultCameraPosition = new THREE.Vector3(1.6, 3.8, 35.);
