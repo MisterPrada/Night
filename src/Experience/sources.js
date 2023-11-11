@@ -107,11 +107,11 @@ export default [
         path: 'models/Book/book.glb'
     },
 
-    {
-        name: 'catModel',
-        type: 'gltfModel',
-        path: 'models/Cat/cat.glb'
-    },
+    // {
+    //     name: 'catModel',
+    //     type: 'gltfModel',
+    //     path: 'models/Cat/cat.glb'
+    // },
 
     {
         name: 'barqueModel',
