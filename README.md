@@ -1,5 +1,13 @@
 Night Galaxy
 
+
 Live - https://night.misterprada.com
 
-https://github-production-user-asset-6210df.s3.amazonaws.com/8146111/281478954-a2d05e85-469b-4422-87a6-959fba81f955.gif
+<img alt="Itachi" src="https://github.com/MisterPrada/Night/assets/8146111/90b88423-eb5c-447c-88b8-ebb8289bc8b4"  />
+
+## Instructions
+
+```
+npm install
+npm run dev
+```
